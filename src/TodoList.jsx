@@ -1,6 +1,6 @@
 import { supabase } from "./supabaseClient";
 import { useEffect, useState } from "react";
-import Button from "./components/button";
+import Button from "./components/Button";
 import IconButton from "./components/IconButton";
 import Navbar from "./components/Navbar";
 

@@ -15,13 +15,6 @@ const Profile = ({ onBack }) => {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
 
-  useEffect(() => {
-    supabase.auth.getUser().then(({ data }) => {
-      setUser(data.user);
-      fetchProfile(data.user.id);
-    });
-  }, []);
-
   const fetchProfile = async (userId) => {
     const { data, error } = await supabase
       .from("profiles")
@@ -36,6 +29,13 @@ const Profile = ({ onBack }) => {
     }
     setLoading(false);
   };
+
+  useEffect(() => {
+    supabase.auth.getUser().then(({ data }) => {
+      setUser(data.user);
+      fetchProfile(data.user.id);
+    });
+  }, []);
 
   const saveProfile = async () => {
     setSaving(true);

@@ -15,6 +15,26 @@ const TodoList = ({ onGoToProfile }) => {
     });
   }, []);
 
+
+  useEffect(() => {
+    if (user) {
+      const fetchTodos = async () => {
+        const { data, error } = await supabase
+          .from("ToDos")
+          .select("*")
+          .eq("user_id", user.id)
+          .order("created_at", { ascending: true });
+
+        if (error) {
+          console.error("Fetch error:", error);
+        } else {
+          setTasks(data);
+        }
+      };
+      fetchTodos();
+    }
+  }, [user]);
+
   const fetchTodos = async () => {
     const { data, error } = await supabase
       .from("ToDos")
@@ -28,12 +48,6 @@ const TodoList = ({ onGoToProfile }) => {
       setTasks(data);
     }
   };
-
-  useEffect(() => {
-    if (user) {
-      fetchTodos();
-    }
-  }, [user]);
 
   const addTask = async () => {
     if (newTask.trim() === "") return;
@@ -104,7 +118,7 @@ const TodoList = ({ onGoToProfile }) => {
 
           <div className="space-y-2">
             <ol className="space-y-2">
-              {tasks.map((task, index) => (
+              {tasks.map((task) => (
                 <li
                   key={task.id}
                   className="flex items-center justify-between bg-rose-200 p-3 rounded-lg shadow-sm hover:shadow-md hover:bg-rose-500 transition duration-200"

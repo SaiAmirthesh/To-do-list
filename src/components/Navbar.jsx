@@ -1,5 +1,5 @@
 import { supabase } from "../supabaseClient";
-import logo from "../assets/checklist.png";
+import logo from "../assets/checklist-DZsA-jFO.png";
 
 function Navbar({ onGoToProfile }) {
   const handleLogout = async () => {

@@ -22,7 +22,7 @@ const Profile = ({ onBack }) => {
       .eq("id", userId)
       .single();
 
-    if (error && error.code !== "PGRST116") { // PGRST116 is no rows
+    if (error && error.code !== "PGRST116") {
       console.error("Fetch profile error:", error);
     } else if (data) {
       setProfile(data);
